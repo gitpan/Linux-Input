@@ -1,0 +1,11 @@
+bin/evtest.pl
+Build.PL
+INSTALL
+lib/Linux/Input.pm
+lib/Linux/Input/Constants.pm
+lib/Linux/Input/Joystick.pm
+MANIFEST			This list of files
+MANIFEST.SKIP
+META.yml
+README
+t/00_load.t
