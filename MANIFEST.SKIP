@@ -7,3 +7,4 @@
 \b\.xvpics\b
 \b_build\b
 ^Build$
+^Linux-Input.*gz$

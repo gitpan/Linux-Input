@@ -131,4 +131,4 @@ F</usr/src/linux/Documentation/input/joystick.txt>
 =cut
 
 # vim:sw=2 sts=2 expandtab
-# $Id$
+# $Id: Joystick.pm,v 1.1 2004/10/13 07:09:55 beppu Exp $

@@ -1,6 +1,6 @@
 package Linux::Input;
 
-$VERSION = '1.00';
+$VERSION = '1.01';
 
 use base 'Class::Data::Inheritable';
 use strict;
@@ -78,7 +78,7 @@ Linux::Input - Linux input event interface
 
 =head1 SYNOPSIS
 
-Example: 1 Joystick using Event API
+Example: 1 joystick using event API
 
   my $js1 = Linux::Input->new('/dev/input/event3');
   while (1) {
@@ -88,7 +88,7 @@ Example: 1 Joystick using Event API
     }
   }
 
-Example: 2 Joysticks using Joystick API
+Example: 2 joysticks using joystick API (different event structure)
 
   my $js1 = Linux::Input::Joystick->new('/dev/input/js0');
   my $js2 = Linux::Input::Joystick->new('/dev/input/js1');
@@ -108,7 +108,7 @@ Example: 2 Joysticks using Joystick API
     }
   }
 
-Example: monitor all input devices
+Example 3: monitor all input devices
 
   use File::Basename qw(basename);
   my @inputs = map { "/dev/input/" . basename($_) }
@@ -126,11 +126,20 @@ Example: monitor all input devices
     # work
   }
 
+Example 4: testing for events on the command line
+
+  # information on what event queue belongs to what device
+  cat /proc/bus/input/devices
+
+  # verify that events are coming in
+  evtest.pl /dev/input/event*
+
+
 =head1 DESCRIPTION
 
 L<Linux::Input> provides a pure-perl interface to the
-Linux kernels input event interface.  It basically provides
-a uniform API for getting data from all the different
+Linux kernel's input event interface.  It basically provides
+a uniform API for getting realtime data from all the different
 input devices that Linux supports.
 
 For more information, please read:
@@ -184,7 +193,22 @@ the current L<Linux::Input> object.
 
 This method takes a C<$timeout> value as a parameter
 and returns a list of C<@events> for the current
-L<Linux::Input> object.
+L<Linux::Input> object.  Each event is a hashref with
+the following key/value pairs.
+
+=over 2
+
+=item tv_sec
+
+=item tv_usec
+
+=item type
+
+=item code
+
+=item value
+
+=back
 
 B<Example>:
 

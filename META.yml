@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name: Linux-Input
-version: 1.00
+version: 1.01
 author:
   - John Beppu (beppu@cpan.org)
 abstract: Linux input event interface
@@ -14,7 +14,7 @@ build_requires:
 provides:
   Linux::Input:
     file: lib/Linux/Input.pm
-    version: 1.00
+    version: 1.01
   Linux::Input::Joystick:
     file: lib/Linux/Input/Joystick.pm
 generated_by: Module::Build version 0.25
