@@ -1,6 +1,6 @@
 package Linux::Input;
 
-$VERSION = '1.01';
+$VERSION = '1.02';
 
 use base 'Class::Data::Inheritable';
 use strict;
@@ -12,7 +12,11 @@ use IO::Select;
 
 # class data
 Linux::Input->mk_classdata('event_bytes');
-Linux::Input->event_bytes(($Config{intsize} * 3) + ($Config{shortsize} * 2));
+Linux::Input->event_bytes(
+  ($Config{longsize} * 2) +   # input_event.time (struct timeval)
+  ($Config{i16size} * 2) +    # input_event.type, input_event.code
+  ($Config{i32size})          # input_event.value
+);
 Linux::Input->mk_classdata('timeout');
 Linux::Input->timeout(0.01);
 
@@ -51,11 +55,12 @@ sub poll {
   my $selector = $self->selector();
   my @ev;
 
+  my $struct_len = Linux::Input->event_bytes();
   while (my ($fh) = $selector->can_read($timeout)) {
     my $buffer;
-    my $len = sysread($fh, $buffer, Linux::Input->event_bytes);
+    my $len = sysread($fh, $buffer, $struct_len);
     my ($sec, $usec, $type, $code, $value) =
-      unpack('I!I!S!S!I!', $buffer);
+      unpack('L!L!S!S!i!', $buffer);
     my $event = {
       tv_sec  => $sec,
       tv_usec => $usec,
@@ -132,7 +137,7 @@ Example 4: testing for events on the command line
   cat /proc/bus/input/devices
 
   # verify that events are coming in
-  evtest.pl /dev/input/event*
+  sudo evtest.pl /dev/input/event*
 
 
 =head1 DESCRIPTION

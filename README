@@ -9,7 +9,7 @@
 
 
 
-.oO( What's this about Linux's input system? )
+.oO( A Brief Introduction to Linux's Input Event System )
 
 
   If your Linux kernel is version 2.6.0 or higher,
@@ -25,16 +25,14 @@
     crw-r--r--    1 root     root      13,  32 Dec 31  1969 mouse0
 
   The Linux kernel has implemented a nice system whereby
-  you open one of these files and wait for events to happen.
+  you can open any of these files and wait for events to happen.
   When an event happens, the kernel will write a predictably
-  sized C structure to these virtual files.
+  sized data structure to these virtual files.
 
   This works for practically every input device that Linux
   supports, whether it be a keyboard, a mouse, a joystick
-  or whatever.  Just `cat /proc/bus/inputs/devices` to see
-  what you have at your disposal.
-
-  [ XXX - to be continued ]
+  or something more exotic.  Just `cat /proc/bus/inputs/devices` 
+  to see what you have at your disposal.
 
   Furthermore, this system lets you receive makes and
   breaks which are really useful for anyone trying to write
@@ -93,7 +91,7 @@
 
     After you install this distribution, try typing:
 
-      evtest.pl /dev/input/event*
+      sudo evtest.pl /dev/input/event*
 
     Then, move you mouse, push some keys, move
     your gamepad around, etc....  This will help

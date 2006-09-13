@@ -1,5 +1,6 @@
 bin/evtest.pl
 Build.PL
+Changes
 INSTALL
 lib/Linux/Input.pm
 lib/Linux/Input/Constants.pm

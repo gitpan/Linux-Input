@@ -4,7 +4,11 @@ use strict;
 use Linux::Input::Joystick;
 use Getopt::Long;
 
-die ("Usage: $0 <device_file>...\n") if (!@ARGV);
+die (qq{Usage: $0 <device_file>...
+
+Example:
+  sudo $0 /dev/input/event*
+}) if (!@ARGV);
 
 my @dev = map { Linux::Input->new($_) } @ARGV;
 my $selector = IO::Select->new( map { $_->fh } @dev );
@@ -35,5 +39,24 @@ while (1) {
 }
 
 exit 0;
+
+=head1 NAME
+
+evtest.pl - Linux::Input event testing utility
+
+=head1 SYNOPSIS
+
+  sudo evtest.pl /dev/input/event*
+
+=head1 DESCRIPTION
+
+This utility will observe all the input devices that are passed on to the
+command line, and print the event data as it comes in.
+
+=head1 AUTHOR
+
+John Beppu (beppu@cpan.org)
+
+=cut
 
 # vim:sw=2 sts=2

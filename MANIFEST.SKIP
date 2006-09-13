@@ -1,4 +1,5 @@
 \bCVS\b
+\bsvn\b
 ^MANIFEST\.bak$
 ^Makefile$
 \..*\.swp$
