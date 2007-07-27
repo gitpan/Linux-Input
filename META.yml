@@ -1,6 +1,6 @@
 ---
 name: Linux-Input
-version: 1.02
+version: 1.03
 author:
   - John Beppu (beppu@cpan.org)
 abstract: Linux input event interface
@@ -16,10 +16,10 @@ build_requires:
 provides:
   Linux::Input:
     file: lib/Linux/Input.pm
-    version: 1.02
+    version: 1.03
   Linux::Input::Joystick:
     file: lib/Linux/Input/Joystick.pm
-generated_by: Module::Build version 0.28
+generated_by: Module::Build version 0.2807
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

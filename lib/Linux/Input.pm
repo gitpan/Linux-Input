@@ -1,6 +1,6 @@
 package Linux::Input;
 
-$VERSION = '1.02';
+$VERSION = '1.03';
 
 use base 'Class::Data::Inheritable';
 use strict;
@@ -68,7 +68,7 @@ sub poll {
       code    => $code,
       value   => $value,
     };
-    push @ev, $event unless ($type == 0);
+    push @ev, $event if (defined($type));
   }
   return @ev;
 }
